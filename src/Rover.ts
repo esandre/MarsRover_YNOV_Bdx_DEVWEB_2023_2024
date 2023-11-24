@@ -12,16 +12,12 @@ export class Rover {
     Position: Position;
 
     Avancer() : Rover {
-        if(this._orientation == Orientation.Nord)
-            return new Rover(this.Position.Latitude + 1, this.Position.Longitude, this._orientation);
-        if(this._orientation == Orientation.Est)
-            return new Rover(this.Position.Latitude, this.Position.Longitude + 1, this._orientation);
-        if(this._orientation == Orientation.Ouest)
-            return new Rover(this.Position.Latitude, this.Position.Longitude - 1, this._orientation);
-        else return this.Reculer();
+        let destination = this._orientation.appliquer(this.Position);
+        return new Rover(destination.Latitude, destination.Longitude, this._orientation);
     }
 
     Reculer() {
-        return new Rover(this.Position.Latitude - 1, this.Position.Longitude, this._orientation);
+        let destination = this._orientation.opposé().appliquer(this.Position);
+        return new Rover(destination.Latitude, destination.Longitude, this._orientation);
     }
 }

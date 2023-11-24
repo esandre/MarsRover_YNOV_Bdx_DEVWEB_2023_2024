@@ -1,8 +1,25 @@
-export class Orientation{
-    static Nord: Orientation = new Orientation();
-    static Sud: Orientation = new Orientation();
-    static Est: Orientation = new Orientation();
-    static Ouest: Orientation = new Orientation();
+import {Position} from "./Position";
 
-    private Orientation(){}
+export class Orientation{
+    static Nord: Orientation = new Orientation(new Position(0, 1));
+    static Sud: Orientation = new Orientation(new Position(0, -1));
+    static Est: Orientation = new Orientation(new Position(1, 0));
+    static Ouest: Orientation = new Orientation(new Position(-1, 0));
+
+    private _vecteur: Position;
+
+    private constructor(vecteur: Position){
+        this._vecteur = vecteur;
+    }
+
+    public appliquer(position: Position): Position {
+        return this._vecteur.add(position);
+    }
+
+    public opposé() {
+        if(this == Orientation.Nord) return Orientation.Sud;
+        if(this == Orientation.Sud) return Orientation.Nord;
+        if(this == Orientation.Est) return Orientation.Ouest;
+        return Orientation.Est;
+    }
 }

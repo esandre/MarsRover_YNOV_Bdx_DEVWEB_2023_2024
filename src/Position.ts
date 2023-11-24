@@ -6,4 +6,8 @@ export class Position{
 
     Latitude: number;
     Longitude: number;
+
+    public add(position: Position) : Position {
+        return new Position(this.Longitude + position.Longitude, this.Latitude + position.Latitude);
+    }
 }
