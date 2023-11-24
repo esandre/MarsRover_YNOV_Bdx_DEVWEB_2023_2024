@@ -3,6 +3,8 @@ import {Rover} from "../src/Rover";
 describe('Un Rover peut avancer', () => {
     test.each([
         [0, 0],
+        [1, 0],
+        [0, 1],
         [1, 1]
     ])('ETANT DONNE un Rover atterrissant en (latitude, longitude) ' +
         'QUAND on le fait avancer ' +
