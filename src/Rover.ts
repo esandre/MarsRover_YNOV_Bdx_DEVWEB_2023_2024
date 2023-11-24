@@ -8,6 +8,6 @@ export class Rover {
     Position: Position;
 
     Avancer() : Rover {
-        return new Rover(1, 0)
+        return new Rover(this.Position.Latitude + 1, this.Position.Longitude)
     }
 }
