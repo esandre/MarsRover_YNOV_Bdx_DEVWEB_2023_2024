@@ -20,4 +20,8 @@ export class Rover {
         let destination = this._orientation.opposé().appliquer(this.Position);
         return new Rover(destination.Latitude, destination.Longitude, this._orientation);
     }
+
+    TournerADroite() : Rover {
+        return new Rover(this.Position.Latitude, this.Position.Longitude, Orientation.Est);
+    }
 }
