@@ -1,4 +1,5 @@
 import {Rover} from "../src/Rover";
+import {Orientation} from "../src/Orientation";
 
 describe('Un Rover peut avancer', () => {
     test.each([
@@ -6,11 +7,11 @@ describe('Un Rover peut avancer', () => {
         [1, 0],
         [0, 1],
         [1, 1]
-    ])('ETANT DONNE un Rover atterrissant en (latitude, longitude) ' +
+    ])('ETANT DONNE un Rover orienté Nord atterrissant en (latitude, longitude) ' +
         'QUAND on le fait avancer ' +
         'ALORS sa latitude augmente de 1 ' +
         'ET sa longitude reste la même', (latitude, longitude) => {
-        let rover = new Rover(latitude, longitude)
+        let rover = new Rover(latitude, longitude, Orientation.Nord)
 
         rover = rover.Avancer();
 
@@ -23,11 +24,11 @@ describe('Un Rover peut avancer', () => {
         [1, 0],
         [0, 1],
         [1, 1]
-    ])('ETANT DONNE un Rover atterrissant en (latitude, longitude) ' +
+    ])('ETANT DONNE un Rover orienté Nord atterrissant en (latitude, longitude) ' +
         'QUAND on le fait reculer ' +
         'ALORS sa latitude diminue de 1 ' +
         'ET sa longitude reste la même', (latitude, longitude) => {
-        let rover = new Rover(latitude, longitude)
+        let rover = new Rover(latitude, longitude, Orientation.Nord)
 
         rover = rover.Reculer();
 
