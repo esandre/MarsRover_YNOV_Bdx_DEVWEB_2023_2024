@@ -10,4 +10,8 @@ export class Rover {
     Avancer() : Rover {
         return new Rover(this.Position.Latitude + 1, this.Position.Longitude)
     }
+
+    Reculer() {
+        return new Rover(this.Position.Latitude - 1, this.Position.Longitude);
+    }
 }
