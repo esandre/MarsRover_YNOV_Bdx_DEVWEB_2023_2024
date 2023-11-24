@@ -12,7 +12,9 @@ export class Rover {
     Position: Position;
 
     Avancer() : Rover {
-        return new Rover(this.Position.Latitude + 1, this.Position.Longitude, this._orientation)
+        if(this._orientation == Orientation.Nord)
+            return new Rover(this.Position.Latitude + 1, this.Position.Longitude, this._orientation);
+        else return this.Reculer();
     }
 
     Reculer() {
