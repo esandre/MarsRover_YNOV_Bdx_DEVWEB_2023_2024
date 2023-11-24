@@ -41,6 +41,40 @@ describe('Un Rover peut avancer', () => {
         [1, 0],
         [0, 1],
         [1, 1]
+    ])('ETANT DONNE un Rover orienté Est atterrissant en (latitude, longitude) ' +
+        'QUAND on le fait avancer ' +
+        'ALORS sa longitude augmente de 1 ' +
+        'ET sa longitude reste la même', (latitude, longitude) => {
+        let rover = new Rover(latitude, longitude, Orientation.Est)
+
+        rover = rover.Avancer();
+
+        expect(rover.Position.Latitude).toBe(latitude);
+        expect(rover.Position.Longitude).toBe(longitude + 1);
+    });
+
+    test.each([
+        [0, 0],
+        [1, 0],
+        [0, 1],
+        [1, 1]
+    ])('ETANT DONNE un Rover orienté Ouest atterrissant en (latitude, longitude) ' +
+        'QUAND on le fait avancer ' +
+        'ALORS sa longitude diminue de 1 ' +
+        'ET sa longitude reste la même', (latitude, longitude) => {
+        let rover = new Rover(latitude, longitude, Orientation.Ouest)
+
+        rover = rover.Avancer();
+
+        expect(rover.Position.Latitude).toBe(latitude);
+        expect(rover.Position.Longitude).toBe(longitude - 1);
+    });
+
+    test.each([
+        [0, 0],
+        [1, 0],
+        [0, 1],
+        [1, 1]
     ])('ETANT DONNE un Rover orienté Nord atterrissant en (latitude, longitude) ' +
         'QUAND on le fait reculer ' +
         'ALORS sa latitude diminue de 1 ' +
