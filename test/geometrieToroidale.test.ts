@@ -1,13 +1,21 @@
 import {RoverBuilder} from "./utilities/RoverBuilder";
 import {PlanèteToroïdale} from "../src/PlanèteToroïdale";
+import {Orientation} from "../src/Orientation";
+import {multiplyAndFlatten} from "./utilities/cartesianData";
+
+const orientations = [Orientation.Nord, Orientation.Sud, Orientation.Est, Orientation.Ouest];
 
 describe("Sur une planète toroïdale, on revient toujours à son point de départ", () => {
-    test.each([[1], [2]])("ETANT DONNE une planète toroïdale de taille n = %s " +
+    test.each(
+        multiplyAndFlatten([1, 2], orientations)
+    )("ETANT DONNE une planète toroïdale de taille n = %s " +
+        "ET un rover orienté %s " +
         "QUAND le rover avance n fois " +
-        "ALORS rien ne se passe", (taille: number) =>{
+        "ALORS rien ne se passe", (taille: number, orientation: Orientation) =>{
         let planète = new PlanèteToroïdale(taille);
         let roverInitial = new RoverBuilder()
             .SurLaPlanète(planète)
+            .Orienté(orientation)
             .Build();
 
         let roverAprèsMouvement = roverInitial;
@@ -17,16 +25,21 @@ describe("Sur une planète toroïdale, on revient toujours à son point de dépa
         expect(roverAprèsMouvement.Position).toEqual(roverInitial.Position);
     });
 
-    test.each([[2], [3]])("ETANT DONNE une planète toroïdale de taille n = %s " +
+    test.each(multiplyAndFlatten([2, 3], orientations),)("ETANT DONNE une planète toroïdale de taille n = %s " +
+        "ET un rover orienté %s " +
         "QUAND le rover avance n - 1 fois " +
-        "ALORS il est dans une position équivalente au même rover sur une planète infinie", (taille: number) =>{
+        "ALORS il est dans une position équivalente au même rover sur une planète infinie",
+        (taille: number, orientation: Orientation) =>{
         let planèteTestée = new PlanèteToroïdale(taille);
 
         let roverTesté = new RoverBuilder()
             .SurLaPlanète(planèteTestée)
+            .Orienté(orientation)
             .Build();
 
-        let roverTémoin = new RoverBuilder().Build();
+        let roverTémoin = new RoverBuilder()
+            .Orienté(orientation)
+            .Build();
 
         let roverTestéAprèsMouvement = roverTesté;
         let roverTémoinAprèsMouvement = roverTémoin;
@@ -39,12 +52,15 @@ describe("Sur une planète toroïdale, on revient toujours à son point de dépa
         expect(roverTestéAprèsMouvement.Position).toEqual(roverTémoinAprèsMouvement.Position);
     });
 
-    test.each([[1], [2]])("ETANT DONNE une planète toroïdale de taille n = %s " +
+    test.each(multiplyAndFlatten([1, 2], orientations))("ETANT DONNE une planète toroïdale de taille n = %s " +
+        "ET un rover orienté %s " +
         "QUAND le rover recule n fois " +
-        "ALORS rien ne se passe", (taille: number) =>{
+        "ALORS rien ne se passe",
+        (taille: number, orientation: Orientation) =>{
         let planète = new PlanèteToroïdale(taille);
         let roverInitial = new RoverBuilder()
             .SurLaPlanète(planète)
+            .Orienté(orientation)
             .Build();
 
         let roverAprèsMouvement = roverInitial;

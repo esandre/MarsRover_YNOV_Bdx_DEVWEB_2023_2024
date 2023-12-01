@@ -18,6 +18,6 @@ export class Position{
         let latitude = this.Latitude % number;
         if(latitude === -0) latitude = 0;
 
-        return new Position(this.Longitude, latitude);
+        return new Position(longitude, latitude);
     }
 }
