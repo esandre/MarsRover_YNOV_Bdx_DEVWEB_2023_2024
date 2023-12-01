@@ -1,4 +1,3 @@
-import {Rover} from "../src/Rover";
 import {Orientation} from "../src/Orientation";
 import {multiplyAndFlatten} from "./utilities/cartesianData";
 import {RoverBuilder} from "./utilities/RoverBuilder";

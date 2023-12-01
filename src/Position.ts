@@ -10,4 +10,8 @@ export class Position{
     public add(position: Position) : Position {
         return new Position(this.Longitude + position.Longitude, this.Latitude + position.Latitude);
     }
+
+    public modulo(number: number) {
+        return new Position(this.Longitude % number, this.Latitude % number);
+    }
 }

@@ -1,4 +1,3 @@
-import {Rover} from "../src/Rover";
 import {Orientation} from "../src/Orientation";
 import {RoverBuilder} from "./utilities/RoverBuilder";
 
