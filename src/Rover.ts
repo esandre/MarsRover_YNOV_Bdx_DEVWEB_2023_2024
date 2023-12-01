@@ -2,26 +2,26 @@ import {Position} from "./Position"
 import {Orientation} from "./Orientation";
 
 export class Rover {
-    private _orientation: Orientation;
+    private readonly _orientation: Orientation;
+    public readonly Position: Position;
 
-    constructor(latitude: number, longitude: number, orientation: Orientation) {
+    constructor(position: Position, orientation: Orientation) {
         this._orientation = orientation;
-        this.Position = new Position(longitude, latitude);
+        this.Position = position;
     }
 
-    Position: Position;
 
     Avancer() : Rover {
         let destination = this._orientation.appliquer(this.Position);
-        return new Rover(destination.Latitude, destination.Longitude, this._orientation);
+        return new Rover(destination, this._orientation);
     }
 
     Reculer() {
         let destination = this._orientation.opposé().appliquer(this.Position);
-        return new Rover(destination.Latitude, destination.Longitude, this._orientation);
+        return new Rover(destination, this._orientation);
     }
 
     TournerADroite() : Rover {
-        return new Rover(this.Position.Latitude, this.Position.Longitude, Orientation.Est);
+        return new Rover(this.Position, Orientation.Est);
     }
 }
