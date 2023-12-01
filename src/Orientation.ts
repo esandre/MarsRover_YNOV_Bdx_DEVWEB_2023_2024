@@ -24,9 +24,10 @@ export class Orientation{
     }
 
     public opposé() {
-        if(this == Orientation.Nord) return Orientation.Sud;
-        if(this == Orientation.Sud) return Orientation.Nord;
-        if(this == Orientation.Est) return Orientation.Ouest;
-        return Orientation.Est;
+        return this.SuivanteHoraire().SuivanteHoraire();
+    }
+
+    SuivanteAntihoraire() {
+        return this.opposé().SuivanteHoraire();
     }
 }
