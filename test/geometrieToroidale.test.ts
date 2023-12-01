@@ -1,4 +1,3 @@
-import {Rover} from "../src/Rover";
 import {RoverBuilder} from "./utilities/RoverBuilder";
 import {PlanèteToroïdale} from "../src/PlanèteToroïdale";
 

@@ -1,7 +1,6 @@
 import {Rover} from "../../src/Rover";
 import {Orientation} from "../../src/Orientation";
 import {Position} from "../../src/Position";
-import {PlanèteToroïdale} from "../../src/PlanèteToroïdale";
 import {PlanèteInfinie} from "./PlanèteInfinie";
 import {PlanèteInterface} from "../../src/Planète.interface";
 
