@@ -1,6 +1,5 @@
 import {Position} from "./Position"
 import {Orientation} from "./Orientation";
-import {PlanèteToroïdale} from "./PlanèteToroïdale";
 import {PlanèteInterface} from "./Planète.interface";
 
 export class Rover {
@@ -10,20 +9,18 @@ export class Rover {
 
     constructor(position: Position, orientation: Orientation, planète: PlanèteInterface) {
         this._orientation = orientation;
-        this.Position = position;
+        this.Position = planète.Normaliser(position);
         this._planète = planète;
     }
 
 
     public Avancer() : Rover {
         let destination = this._orientation.appliquer(this.Position);
-        destination = this._planète.Normaliser(destination);
         return new Rover(destination, this._orientation, this._planète);
     }
 
     public Reculer() {
         let destination = this._orientation.opposé().appliquer(this.Position);
-        destination = this._planète.Normaliser(destination);
         return new Rover(destination, this._orientation, this._planète);
     }
 

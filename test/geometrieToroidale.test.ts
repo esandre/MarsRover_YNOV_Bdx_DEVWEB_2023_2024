@@ -85,6 +85,19 @@ describe("Sur une planète toroïdale, on revient toujours à son point de dépa
             expect(roverTesté.Position).toEqual(roverTémoin.Position);
         });
 
+    test("ETANT DONNE un Rover aterrissant en position 1,1 sur une planète de taille 1 " +
+        "ALORS il est en position 0,0", () => {
+        let planèteTestée = new PlanèteToroïdale(1);
+
+        let rover = new RoverBuilder()
+            .SurLaPlanète(planèteTestée)
+            .AyantPourPosition(1, 1)
+            .Build();
+
+        expect(rover.Position.Latitude).toBe(0);
+        expect(rover.Position.Longitude).toBe(0);
+    })
+
     test.each([[0], [-1]])("Une planète toroïdale est au moins de taille 1",
         (taille: number) => {
                 expect(() => new PlanèteToroïdale(taille)).toThrow()
