@@ -17,10 +17,10 @@ describe("Sur une planète toroïdale, on revient toujours à son point de dépa
         expect(roverAprèsMouvement.Position).toEqual(roverInitial.Position);
     });
 
-    test("ETANT DONNE une planète toroïdale de taille 2 " +
-        "QUAND le rover avance 1 fois " +
-        "ALORS il est dans une position équivalente au même rover sur une planète infinie", () =>{
-        let planèteTestée = new PlanèteToroïdale(2);
+    test.each([[2], [3]])("ETANT DONNE une planète toroïdale de taille n = %s " +
+        "QUAND le rover avance n - 1 fois " +
+        "ALORS il est dans une position équivalente au même rover sur une planète infinie", (taille: number) =>{
+        let planèteTestée = new PlanèteToroïdale(taille);
 
         let roverTesté = new RoverBuilder()
             .SurLaPlanète(planèteTestée)
@@ -28,8 +28,13 @@ describe("Sur une planète toroïdale, on revient toujours à son point de dépa
 
         let roverTémoin = new RoverBuilder().Build();
 
-        let roverTestéAprèsMouvement = roverTesté.Avancer();
-        let roverTémoinAprèsMouvement = roverTémoin.Avancer();
+        let roverTestéAprèsMouvement = roverTesté;
+        let roverTémoinAprèsMouvement = roverTémoin;
+
+        for (let mouvements = 0; mouvements < taille - 1; mouvements ++) {
+            roverTestéAprèsMouvement = roverTestéAprèsMouvement.Avancer();
+            roverTémoinAprèsMouvement = roverTémoinAprèsMouvement.Avancer();
+        }
 
         expect(roverTestéAprèsMouvement.Position).toEqual(roverTémoinAprèsMouvement.Position);
     });
