@@ -27,7 +27,7 @@ export class Orientation{
         return this.SuivanteHoraire().SuivanteHoraire();
     }
 
-    SuivanteAntihoraire() {
+    public SuivanteAntihoraire() {
         return this.opposé().SuivanteHoraire();
     }
 }

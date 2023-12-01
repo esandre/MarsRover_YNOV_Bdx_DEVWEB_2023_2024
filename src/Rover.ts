@@ -11,21 +11,21 @@ export class Rover {
     }
 
 
-    Avancer() : Rover {
+    public Avancer() : Rover {
         let destination = this._orientation.appliquer(this.Position);
         return new Rover(destination, this._orientation);
     }
 
-    Reculer() {
+    public Reculer() {
         let destination = this._orientation.opposé().appliquer(this.Position);
         return new Rover(destination, this._orientation);
     }
 
-    TournerADroite() : Rover {
+    public TournerADroite() : Rover {
         return new Rover(this.Position, this._orientation.SuivanteHoraire());
     }
 
-    TournerAGauche() {
+    public TournerAGauche() {
         return new Rover(this.Position, this._orientation.SuivanteAntihoraire());
     }
 }
