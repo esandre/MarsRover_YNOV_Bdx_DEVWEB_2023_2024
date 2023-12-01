@@ -12,12 +12,15 @@ export class Position{
     }
 
     public modulo(number: number) {
-        let longitude = this.Longitude % number;
-        if(longitude === -0) longitude = 0;
-
-        let latitude = this.Latitude % number;
-        if(latitude === -0) latitude = 0;
+        let longitude = this.moduloEntier(this.Longitude, number);
+        let latitude = this.moduloEntier(this.Latitude, number);
 
         return new Position(longitude, latitude);
+    }
+
+    private moduloEntier(num: number, mod: number) : number {
+        const valeurRéduiteSignée = (num % mod) % -mod;
+        const valeurNonSignée = valeurRéduiteSignée + mod;
+        return valeurNonSignée % mod;
     }
 }

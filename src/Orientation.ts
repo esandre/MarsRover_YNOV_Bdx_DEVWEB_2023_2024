@@ -30,4 +30,11 @@ export class Orientation{
     public SuivanteAntihoraire() {
         return this.opposé().SuivanteHoraire();
     }
+
+    public toString(){
+        if(this == Orientation.Nord) return "Nord";
+        if(this == Orientation.Est) return "Est";
+        if(this == Orientation.Sud) return "Sud";
+        return "Ouest";
+    }
 }

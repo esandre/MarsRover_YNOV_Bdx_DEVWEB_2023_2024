@@ -25,31 +25,26 @@ describe("Sur une planète toroïdale, on revient toujours à son point de dépa
         expect(roverAprèsMouvement.Position).toEqual(roverInitial.Position);
     });
 
-    test.each(multiplyAndFlatten([2, 3], orientations),)("ETANT DONNE une planète toroïdale de taille n = %s " +
+    test.each(multiplyAndFlatten([2, 3], orientations),)(
+        "ETANT DONNE une planète toroïdale de taille n = %s " +
         "ET un rover orienté %s " +
         "QUAND le rover avance n - 1 fois " +
-        "ALORS il est dans une position équivalente au même rover sur une planète infinie",
+        "ALORS il est dans une position équivalente au même rover ayant reculé",
         (taille: number, orientation: Orientation) =>{
         let planèteTestée = new PlanèteToroïdale(taille);
 
-        let roverTesté = new RoverBuilder()
-            .SurLaPlanète(planèteTestée)
-            .Orienté(orientation)
-            .Build();
+            let roverBuilder = new RoverBuilder()
+                .SurLaPlanète(planèteTestée)
+                .Orienté(orientation);
 
-        let roverTémoin = new RoverBuilder()
-            .Orienté(orientation)
-            .Build();
-
-        let roverTestéAprèsMouvement = roverTesté;
-        let roverTémoinAprèsMouvement = roverTémoin;
+            let roverTesté = roverBuilder.Build();
+            let roverTémoin = roverBuilder.Build().Reculer();
 
         for (let mouvements = 0; mouvements < taille - 1; mouvements ++) {
-            roverTestéAprèsMouvement = roverTestéAprèsMouvement.Avancer();
-            roverTémoinAprèsMouvement = roverTémoinAprèsMouvement.Avancer();
+            roverTesté = roverTesté.Avancer();
         }
 
-        expect(roverTestéAprèsMouvement.Position).toEqual(roverTémoinAprèsMouvement.Position);
+        expect(roverTesté.Position).toEqual(roverTémoin.Position);
     });
 
     test.each(multiplyAndFlatten([1, 2], orientations))("ETANT DONNE une planète toroïdale de taille n = %s " +
@@ -69,6 +64,26 @@ describe("Sur une planète toroïdale, on revient toujours à son point de dépa
 
         expect(roverAprèsMouvement.Position).toEqual(roverInitial.Position);
     });
+
+    test.each(multiplyAndFlatten([2, 3], orientations),)("ETANT DONNE une planète toroïdale de taille n = %s " +
+        "ET un rover orienté %s " +
+        "QUAND le rover recule n - 1 fois " +
+        "ALORS il est dans une position équivalente au même rover ayant avancé",
+        (taille: number, orientation: Orientation) =>{
+            let planèteTestée = new PlanèteToroïdale(taille);
+
+            let roverBuilder = new RoverBuilder()
+                .SurLaPlanète(planèteTestée)
+                .Orienté(orientation);
+
+            let roverTesté = roverBuilder.Build();
+            let roverTémoin = roverBuilder.Build().Avancer();
+
+            for (let mouvements = 0; mouvements < taille - 1; mouvements ++)
+                roverTesté = roverTesté.Reculer();
+
+            expect(roverTesté.Position).toEqual(roverTémoin.Position);
+        });
 
     test.each([[0], [-1]])("Une planète toroïdale est au moins de taille 1",
         (taille: number) => {
