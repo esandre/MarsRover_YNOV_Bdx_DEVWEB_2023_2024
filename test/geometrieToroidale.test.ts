@@ -39,6 +39,21 @@ describe("Sur une planète toroïdale, on revient toujours à son point de dépa
         expect(roverTestéAprèsMouvement.Position).toEqual(roverTémoinAprèsMouvement.Position);
     });
 
+    test.each([[1], [2]])("ETANT DONNE une planète toroïdale de taille n = %s " +
+        "QUAND le rover recule n fois " +
+        "ALORS rien ne se passe", (taille: number) =>{
+        let planète = new PlanèteToroïdale(taille);
+        let roverInitial = new RoverBuilder()
+            .SurLaPlanète(planète)
+            .Build();
+
+        let roverAprèsMouvement = roverInitial;
+        for (let mouvements = 0; mouvements < taille; mouvements ++)
+            roverAprèsMouvement = roverAprèsMouvement.Reculer();
+
+        expect(roverAprèsMouvement.Position).toEqual(roverInitial.Position);
+    });
+
     test.each([[0], [-1]])("Une planète toroïdale est au moins de taille 1",
         (taille: number) => {
                 expect(() => new PlanèteToroïdale(taille)).toThrow()

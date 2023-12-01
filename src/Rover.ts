@@ -23,6 +23,7 @@ export class Rover {
 
     public Reculer() {
         let destination = this._orientation.opposé().appliquer(this.Position);
+        destination = this._planète.Normaliser(destination);
         return new Rover(destination, this._orientation, this._planète);
     }
 
