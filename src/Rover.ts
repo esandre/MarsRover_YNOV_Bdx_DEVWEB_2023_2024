@@ -22,6 +22,6 @@ export class Rover {
     }
 
     TournerADroite() : Rover {
-        return new Rover(this.Position, Orientation.Est);
+        return new Rover(this.Position, this._orientation.SuivanteHoraire());
     }
 }

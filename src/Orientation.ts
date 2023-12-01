@@ -12,6 +12,13 @@ export class Orientation{
         this._vecteur = vecteur;
     }
 
+    public SuivanteHoraire() : Orientation{
+        if(this == Orientation.Nord) return Orientation.Est;
+        if(this == Orientation.Est) return Orientation.Sud;
+        if(this == Orientation.Sud) return Orientation.Ouest;
+        return Orientation.Nord;
+    }
+
     public appliquer(position: Position): Position {
         return this._vecteur.add(position);
     }
