@@ -13,13 +13,12 @@ export class Rover {
         this._planète = planète;
     }
 
-
     public Avancer() : Rover {
         let destination = this._orientation.appliquer(this.Position);
         return new Rover(destination, this._orientation, this._planète);
     }
 
-    public Reculer() {
+    public Reculer() : Rover {
         let destination = this._orientation.opposé().appliquer(this.Position);
         return new Rover(destination, this._orientation, this._planète);
     }
@@ -28,7 +27,7 @@ export class Rover {
         return new Rover(this.Position, this._orientation.SuivanteHoraire(), this._planète);
     }
 
-    public TournerAGauche() {
+    public TournerAGauche() : Rover {
         return new Rover(this.Position, this._orientation.SuivanteAntihoraire(), this._planète);
     }
 }
